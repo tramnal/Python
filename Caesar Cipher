@@ -1,0 +1,19 @@
+class CaesarCipher:
+    def __init__(self, shift):
+        """When creating an instance of the class, an integer is taken as input - the shift of the Caesar cipher"""
+
+        _low = __import__('string').ascii_lowercase
+        _up = __import__('string').ascii_uppercase
+
+        '''Creating a table for translating characters'''
+        self._table = str.maketrans(_low, _low[shift:] + _low[:shift]) | str.maketrans(_up, _up[shift:] + _up[:shift])
+
+    def encode(self, text):
+        """The method encrypts the text passed to the input based on the table self._table"""
+
+        return text.translate(self._table)
+
+    def decode(self, text):
+        """The method decrypts the text passed to the input based on the inverted table self._table"""
+
+        return text.translate({v: k for k, v in self._table.items()})
